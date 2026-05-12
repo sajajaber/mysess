@@ -2,8 +2,7 @@ CREATE DATABASE IF NOT EXISTS mysess_db;
 USE mysess_db;
 
 
--- 1. USERS TABLE
-
+-- users table 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -12,21 +11,20 @@ CREATE TABLE users (
     last_name VARCHAR(100) NOT NULL,
     role ENUM('admin', 'teacher', 'therapist', 'nurse', 'parent', 'boarding_staff', 'security_guard') NOT NULL,
     is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- it sets current date and time 
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_email (email),
+    INDEX idx_email (email), -- it makes finding the eamil faster
     INDEX idx_role (role)
 );
 
 
--- 2. STUDENTS TABLE
-
+-- students table
 CREATE TABLE students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     date_of_birth DATE NOT NULL,
-    gender ENUM('male', 'female') NOT NULL,
+    gender ENUM('male', 'female') NOT NULL, -- enum to check one of the fixed optiosn. 
     diagnosis TEXT,
     enrollment_date DATE NOT NULL,
     photo_url VARCHAR(255),
@@ -40,8 +38,7 @@ CREATE TABLE students (
 );
 
 
--- 3. STUDENT ASSIGNMENTS (Teacher/Therapist assigned to students)
-
+-- student assignments (Teacher/Therapist assigned to students)
 CREATE TABLE student_assignments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -50,16 +47,15 @@ CREATE TABLE student_assignments (
     start_date DATE NOT NULL,
     end_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE, -- to deleete all related stuff iep goals and boarding stuff
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, 
     INDEX idx_student (student_id),
     INDEX idx_user (user_id),
     INDEX idx_active (end_date)
 );
 
 
--- 4. IEP GOALS TABLE
-
+-- IEP goals table
 CREATE TABLE iep_goals (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -77,8 +73,7 @@ CREATE TABLE iep_goals (
 );
 
 
--- 5. GOAL PROGRESS TABLE
-
+-- goal progress table
 CREATE TABLE goal_progress (
     id INT AUTO_INCREMENT PRIMARY KEY,
     goal_id INT NOT NULL,
@@ -87,14 +82,13 @@ CREATE TABLE goal_progress (
     recorded_by INT NOT NULL,
     recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (goal_id) REFERENCES iep_goals(id) ON DELETE CASCADE,
-    FOREIGN KEY (recorded_by) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (recorded_by) REFERENCES users(id) ON DELETE CASCADE, -- the reference used so recorded by number must be a valid id in the users table
     INDEX idx_goal (goal_id),
     INDEX idx_date (recorded_at)
 );
 
 
--- 6. SESSIONS TABLE
-
+-- sessions table 
 CREATE TABLE sessions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -114,8 +108,7 @@ CREATE TABLE sessions (
 );
 
 
--- 7. SESSION PARTICIPANTS TABLE
-
+-- session attending table 
 CREATE TABLE session_participants (
     id INT AUTO_INCREMENT PRIMARY KEY,
     session_id INT NOT NULL,
@@ -129,8 +122,7 @@ CREATE TABLE session_participants (
 );
 
 
--- 8. SESSION STUDENTS (Students involved in session)
-
+-- session students involved table
 CREATE TABLE session_students (
     id INT AUTO_INCREMENT PRIMARY KEY,
     session_id INT NOT NULL,
@@ -142,12 +134,11 @@ CREATE TABLE session_students (
 );
 
 
--- 9. SESSION NOTES TABLE
-
+-- session's notes table
 CREATE TABLE session_notes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     session_id INT NOT NULL,
-    author_id INT NOT NULL,
+    author_id INT NOT NULL, -- the one who write the note
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -157,8 +148,7 @@ CREATE TABLE session_notes (
 );
 
 
--- 10. HEALTH RECORDS TABLE
-
+-- health recirds table
 CREATE TABLE health_records (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -174,8 +164,7 @@ CREATE TABLE health_records (
 );
 
 
--- 11. BOARDING LOGS TABLE
-
+-- boarding(live-in) logs table
 CREATE TABLE boarding_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -191,8 +180,7 @@ CREATE TABLE boarding_logs (
 );
 
 
--- 12. CHECK-IN/OUT LOGS TABLE (Security Guard)
-
+-- chek in/out logs table (for the security)
 CREATE TABLE checkin_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -208,8 +196,7 @@ CREATE TABLE checkin_logs (
 );
 
 
--- 13. NOTES/MESSAGES TABLE (Internal communication)
-
+-- notes and internal messaging table
 CREATE TABLE notes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
@@ -228,8 +215,7 @@ CREATE TABLE notes (
 );
 
 
--- 14. NOTIFICATIONS TABLE
-
+-- notificaations table
 CREATE TABLE notifications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -244,8 +230,7 @@ CREATE TABLE notifications (
 );
 
 
--- 15. UPLOADED FILES TABLE
-
+-- file uploading table (Not sure if we will be able to complete this feature)
 CREATE TABLE uploaded_files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT,
@@ -262,8 +247,7 @@ CREATE TABLE uploaded_files (
 );
 
 
--- 16. AUDIT LOGS TABLE (Track important actions)
-
+-- audit(examine) logs tabel to track important actions 
 CREATE TABLE audit_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -278,8 +262,3 @@ CREATE TABLE audit_logs (
     INDEX idx_action (action),
     INDEX idx_date (created_at)
 );
-
-
--- SUCCESS MESSAGE
-SELECT '✅ Database schema created successfully!' AS Status;
-SELECT 'Next step: Run seed.sql to add initial data' AS NextStep;
