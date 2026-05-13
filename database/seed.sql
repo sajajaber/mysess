@@ -1,19 +1,20 @@
 USE mysess_db;
 
--- insesrt users (7 roles), password for testing is set as Admin@123 for all users 
--- hashing technique used is SHA-256: e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7
+-- insesrt users (7 roles), password for testing is set as password for all users 
+-- password is hashed using PHP built in password_hash() function with bcrypt
+
 
 INSERT INTO users (email, password, first_name, last_name, role, is_active) VALUES
-('admin@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Fatima', 'Honeino', 'admin', TRUE),
-('admin2@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Saja', 'Jaber', 'admin', TRUE),
-('teacher@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Israa', 'Honeino', 'teacher', TRUE),
-('teacher2@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Rahaf', 'Honeino', 'teacher', TRUE),
-('therapist@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Bouchra', 'Charbel', 'therapist', TRUE),
-('therapist2@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Hiba', 'Jaber', 'therapist', TRUE),
-('nurse@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Zeinab', 'Jaber', 'nurse', TRUE),
-('parent@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Amin', 'HajAli', 'parent', TRUE),
-('boarding@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Abbas', 'Badreddine', 'boarding_staff', TRUE),
-('security@mysess.com', 'e86f78a8a3caf0b60d8e74e5942aa6d86dc150cd3c03338aef25b7d2d7e3acc7', 'Ismail', 'Awada', 'security_guard', TRUE);
+('admin@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Fatima', 'Honeino', 'admin', TRUE),
+('admin2@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Saja', 'Jaber', 'admin', TRUE),
+('teacher@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Israa', 'Honeino', 'teacher', TRUE),
+('teacher2@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Rahaf', 'Honeino', 'teacher', TRUE),
+('therapist@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Bouchra', 'Charbel', 'therapist', TRUE),
+('therapist2@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Hiba', 'Jaber', 'therapist', TRUE),
+('nurse@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Zeinab', 'Jaber', 'nurse', TRUE),
+('parent@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Amin', 'HajAli', 'parent', TRUE),
+('boarding@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Abbas', 'Badreddine', 'boarding_staff', TRUE),
+('security@mysess.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ismail', 'Awada', 'security_guard', TRUE);
 
 
 -- insert students examples
