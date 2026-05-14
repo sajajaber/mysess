@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS mysess_db;
 USE mysess_db;
 
-
+// fatima and saja 
 -- users table 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,5 +1,5 @@
 USE mysess_db;
-
+// fatima and saja 
 -- insesrt users (7 roles), password for testing is set as password for all users 
 -- password is hashed using PHP built in password_hash() function with bcrypt
 

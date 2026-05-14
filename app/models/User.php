@@ -8,7 +8,7 @@ me and saja are both working on the foundational classes and then we will divide
 */
 class User extends Database {
 
-    //find a user by their email
+    //find user by email
     public function getByEmail($email) {
         $db = $this->connect();
         $query = $db->prepare("SELECT * FROM users WHERE email = ? AND is_active = 1");
@@ -16,7 +16,7 @@ class User extends Database {
         return $query->fetch(PDO::FETCH_ASSOC); //return one row of rhe db as a named array (using column names and not numbers, ahsan men el fetch() func)
     }
 
-    //find a user by their id
+    //find user by id
     public function getById($id) {
         $db = $this->connect();
         $query = $db->prepare("SELECT * FROM users WHERE id = ? AND is_active = 1");
@@ -40,7 +40,7 @@ class User extends Database {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    //add new user to db
+    //add user to db
     public function create($email, $password, $firstName, $lastName, $role) {
         $db = $this->connect();
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // here the pass hash with builtin php func 
