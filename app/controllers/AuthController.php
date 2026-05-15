@@ -1,6 +1,8 @@
+
+<?php
 //fatima code
 //i worked through this tutorial to get some login tips https://codeshack.io/secure-login-system-php-mysql/
-<?php
+
 session_start();
 
 require_once __DIR__ . '/../models/User.php';

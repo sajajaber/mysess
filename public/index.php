@@ -7,7 +7,10 @@ require_once __DIR__ . '/../app/controllers/AuthController.php';
 
 // get URL
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$basePath = '/MySESS_Senior_Project/public';
+$url = str_replace($basePath, '', $url);
 $url = rtrim($url, '/');
+
 
 if ($url == '') {
     $url = '/';
