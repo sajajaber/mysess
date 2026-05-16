@@ -6,10 +6,12 @@
     logout users */
 
     class Session {
-      /* Our session methods  do not depend on other object properties, that's why we define them as static methods */
-       
+  
+    public static function check($role) {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] != $role) {
+            header("Location: /MySESS_Senior_Project/public/login");  //kick
+            exit;
+        }
     }
-
-
-
+}
 ?>

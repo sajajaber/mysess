@@ -1,9 +1,12 @@
 <?php
+session_start();
 // aftima index with router here tut helpful https://www.youtube.com/watch?v=JycBuHA-glg
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../app/models/User.php';
 require_once __DIR__ . '/../app/controllers/AuthController.php';
+require_once __DIR__ . '/../core/Session.php';
+require_once __DIR__ . '/../app/controllers/AdminController.php';
 
 // get URL
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -35,10 +38,18 @@ else if ($url == '/logout') {
     $controller = new AuthController();
     $controller->logout();
 }
-
-//admin tba
+//admin section kenit tba, now 3ndi adminController
 else if ($url == '/admin/dashboard') {
-    echo "admin dashb not complete yet";
+    $controller = new AdminController();
+    $controller->dashboard();
+}
+else if ($url == '/admin/users') {
+    $controller = new AdminController();
+    $controller->users();
+}
+else if ($url == '/admin/students') {
+    $controller = new AdminController();
+    $controller->students();
 }
 
 // teacher tba

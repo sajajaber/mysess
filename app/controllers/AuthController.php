@@ -3,8 +3,6 @@
 //fatima code
 //i worked through this tutorial to get some login tips https://codeshack.io/secure-login-system-php-mysql/
 
-session_start();
-
 require_once __DIR__ . '/../models/User.php';
 
 class AuthController {
@@ -60,34 +58,34 @@ class AuthController {
     public function logout() {
         $_SESSION = array();
         session_destroy();
-        header("Location: /login");
+        header("Location: /MySESS_Senior_Project/public/login");
         exit;
     }
 
     private function goToDashboard($role) {
         if ($role == 'admin') {
-            header("Location: /admin/dashboard");
+            header("Location: /MySESS_Senior_Project/public/admin/dashboard");
         }
         else if ($role == 'teacher') {
-            header("Location: /teacher/dashboard");
+            header("Location: /MySESS_Senior_Project/public/teacher/dashboard");
         }
         else if ($role == 'therapist') {
-            header("Location: /therapist/dashboard");
+            header("Location: /MySESS_Senior_Project/public/therapist/dashboard");
         }
         else if ($role == 'nurse') {
-            header("Location: /nurse/dashboard");
+            header("Location: /MySESS_Senior_Project/public/nurse/dashboard");
         }
         else if ($role == 'parent') {
-            header("Location: /parent/dashboard");
+            header("Location: /MySESS_Senior_Project/public/parent/dashboard");
         }
         else if ($role == 'boarding_staff') {
-            header("Location: /boarding/dashboard");
+            header("Location: /MySESS_Senior_Project/public/boarding/dashboard");
         }
         else if ($role == 'security_guard') {
-            header("Location: /security/dashboard");
+            header("Location: /MySESS_Senior_Project/public/security/dashboard");
         }
         else {
-            header("Location: /login");
+            header("Location: /MySESS_Senior_Project/public/login");
         }
         exit;
     }
