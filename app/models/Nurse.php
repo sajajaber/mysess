@@ -27,7 +27,7 @@ class Nurse extends Database {
     // Medications - Saja 16/5 
 
     // get all active medications for a student
-    public function getActiveMedicationsByStudentId($student_id) {
+    public function getActiveMedicationsByStudent($student_id) {
         $db = $this->connect();
         $query = $db->prepare("SELECT * FROM medications WHERE student_id = ? AND is_active = 1");
         $query->execute([$student_id]);

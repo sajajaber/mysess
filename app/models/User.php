@@ -74,5 +74,29 @@ class User extends Database {
         $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result['total'];
     }
+
+    // Saja code 17/5
+
+    // deactivate user
+    public function deactivate($id) {
+        $db = $this->connect();
+        $query = $db->prepare("UPDATE users SET is_active = 0 WHERE id = ?");
+        return $query->execute([$id]);
+    }
+
+    // reactivate user
+    public function reactivate($id) {
+        $db = $this->connect();
+        $query = $db->prepare("UPDATE users SET is_active = 1 WHERE id = ?");
+        return $query->execute([$id]);
+    }
+
+    public function getActiveByRole($role) {
+        $db = $this->connect();
+        $query = $db->prepare("SELECT * FROM users WHERE role = ? AND is_active = 1 ORDER BY first_name");
+        $query->execute([strtolower($role)]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
+
 ?>
